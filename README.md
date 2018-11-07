@@ -11,3 +11,12 @@ This body-parser module parses the JSON, buffer, string and URL encoded data sub
 </br>
 </br>
 **npm install --save express-handlebars**
+
+##Sequelize
+Like all modules in node.js, we will have to use **Node Package Manager (npm)** to acquire the module from the online package collection. With your application folder open in Visual Studio Code, open the integrated terminal and enter the command
+
+**npm install sequelize --save**
+followed by the command: 
+
+**npm install pg pg-hstore --save**
+This will add both the sequelize and the pg / pg-hstore modules to our node_modules folder, as well as add their names & version numbers to our package.json file under "dependencies".
