@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const Sequelize = require("Sequelize");
+const Sequelize = require("sequelize");
 //We will be using handlebars so we are requiring the handle bars.
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
