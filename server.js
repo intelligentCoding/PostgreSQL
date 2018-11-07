@@ -28,10 +28,10 @@ app.set("view engine", ".hbs");
 /*========================================================================*/
 //Now we will establish a connection and set up sequelize to point to our postgreSQL.
 
-const database = "daqippamshkj3i";
-const userName = "zgufxaqmixziao";
+const database = "";
+const userName = "";
 const password =
-  "4602da84b12a8b06a904295b13004c7002f1c4545ffd80bd6b3fcb75e998378b";
+  "";
 const seq = new Sequelize(database, userName, password, {
   host: "ec2-23-21-192-179.compute-1.amazonaws.com",
   dialect: "postgres",
