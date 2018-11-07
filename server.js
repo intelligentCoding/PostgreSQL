@@ -33,7 +33,7 @@ const userName = "";
 const password =
   "";
 const seq = new Sequelize(database, userName, password, {
-  host: "ec2-23-21-192-179.compute-1.amazonaws.com",
+  host: "",
   dialect: "postgres",
   dialectOptions: {
     ssl: true
