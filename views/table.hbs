@@ -13,61 +13,156 @@
 </head>
 
 <body>
-  {{#each data}}
-  <form method="post" action="/employee/update">
-    <fieldset>
-      <legend>Personal Information</legend>
-      <div class="row">
-        <div class="col-md-6">
+
+</body>
+</br>
+
+
+
+<div class="row">
+  <div class="col-md-8">
+    <form method="post" action="/createEmployee">
+      <fieldset>
+        <div class="form-group">
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input class="form-control" id="firstName" name="firstName" type="text" />
+            </div>
+          </div>
+
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input class="form-control" id="lastName" name="lastName" type="text" />
+            </div>
+          </div>
+
+
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input class="form-control" id="city" name="city" type="text" />
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group"></div>
+            <label for="update"></label>
+            <input name="update" type="submit" class="btn btn-primary pull-right" value="New Employee" />
+          </div>
+
+
+
+
+
+
+        </div>
+
+      </fieldset>
+
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{#each data}}
+
+<div class="row">
+  <div class="col-md-12">
+    <form method="post" action="/employeeUpdate">
+      <fieldset>
+
+        <div class="form-group">
+
+          <input class="form-control" id="id" name="id" type="hidden" value="{{ this.id}}" />
+        </div>
+
+
+
+
+        <div class="col-md-3">
           <div class="form-group">
             <label for="firstName">First Name:</label>
             <input class="form-control" id="firstName" name="firstName" type="text" value="{{ this.firstName}}" />
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-6">
+
+        <div class="col-md-3">
           <div class="form-group">
             <label for="lastName">Last Name:</label>
             <input class="form-control" id="lastName" name="lastName" type="text" value="{{ this.lastName}}" />
           </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-6">
+
+        <div class="col-md-2">
           <div class="form-group">
-            <label for="city">Address (City):</label>
+            <label for="city">City</label>
             <input class="form-control" id="city" name="city" type="text" value="{{ this.city}} " />
           </div>
         </div>
-      </div>
+        <div class="col-md-1">
+          <div class="form-group"></div>
+          <label for="update"></label>
+          <input name="update" type="submit" class="btn btn-primary pull-right" value="Update" />
+        </div>
 
 
-    </fieldset>
-    <hr />
-    <input type="submit" class="btn btn-primary pull-right" value="Update Employee" />
-    <br />
-    <br />
-    <br />
+        <div class="col-md-1">
+          <div class="form-group"></div>
+          <label for="delete"></label>
+          <input name="delete" id="delete" type="submit" class="btn btn-primary pull-right" value="delete" />
+        </div>
+
+
+
+  </div>
+
+  </fieldset>
+
   </form>
-
-  {{/each}}
-
-
+  {{message}}
+</div>
 
 
+</div>
+</div>
+
+
+{{/each}}
 
 
 
-  <!-- Latest compiled and minified jQuery 3.2.1 JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
 
-  <!-- Latest compiled and minified Bootstrap 3.3.7 JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-    crossorigin="anonymous"></script>
+
+
+
+<!-- Latest compiled and minified jQuery 3.2.1 JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified Bootstrap 3.3.7 JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
 </body>
 
 </html>

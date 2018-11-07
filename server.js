@@ -21,6 +21,8 @@ app.engine(
     extname: ".hbs"
   })
 );
+app.set("view engine", ".hbs");
+
 //              Establishing the connection
 //                  and authenticating it.
 /*========================================================================*/
@@ -63,42 +65,102 @@ const Employee = seq.define("Employee", {
 });
 /*========================================================================*/
 
-/*========================================================================*/
-//        synchronize the Database with our
-//        models and automatically add the
-//          table if it does not exist
-seq.sync().then(function() {
-  // create a new "Project" and add it to the database
-  Employee.create({
-    firstName: "Kashif",
-    lastName: "Mahmood"
-  })
-    .then(function(newEmployee) {
-      // you can now access the newly created Project via the variable newEmployee
-      console.log("success!");
-    })
-    .catch(function(error) {
-      console.log("something went wrong!");
-    });
-});
-/*========================================================================*/
+// /*========================================================================*/
+// //        synchronize the Database with our
+// //        models and automatically add(insert) row to the model, if doesn't exist.
+// seq.sync().then(function() {
+//   // adding (insert) a "row to the model (table)"
+//   Employee.create({
+//     firstName: "Kashif",
+//     lastName: "Mahmood",
+//     city: "Karachi"
+//   })
+//     .then(function(newEmployee) {
+//       // you can now access the newly created Project via the variable newEmployee
+//       console.log("*******************success!*******************");
+//     })
+//     .catch(function(error) {
+//       console.log("************something went wrong!*******************");
+//     });
+// });
+// /*========================================================================*/
 
 /*========================================================================*/
 //                  Our get route will take all
 //                   the data from the database
 //                      and shows on webpage.
 app.get("/", (req, res) => {
+  console.log("IN get route / ");
   Employee.findAll({
     //We will order it by id, we can use any column in the model.
     order: ["id"]
-  })
-    .then(inComingData => {
-      console.log("We accessed the Model");
-      res.render("table", { data: inComingData });
-    })
-    .catch(err => {
-      console.log(err);
+  }).then(inComingData => {
+    console.log("We accessed the Model");
+    res.render("table", { data: inComingData });
+  });
+  // res.send("WEll Hello");
+});
+/*========================================================================*/
+
+/*========================================================================*/
+//                 Now we will make our post route which
+//                       will update our Employee
+app.post("/employeeUpdate", (req, res) => {
+  if (req.body.delete) {
+    Employee.destroy({
+      where: { id: req.body.id }
+    }).then(() => {
+      console.log("remove ok");
+      res.redirect("/");
     });
+  } else {
+    //if someone updates with empty name, we should not update it.
+    if (
+      req.body.firstName.trim().length != 0 &&
+      req.body.firstName.trim().length != 0
+    ) {
+      Employee.update(
+        {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          city: req.body.city
+        },
+        /*WE can add conditions here*/ {
+          where: { id: req.body.id }
+        }
+      )
+        .then(function() {
+          res.redirect("/");
+        })
+        .catch(function(reason) {
+          res.render("table", { message: "We couldn't update" });
+        });
+    } else {
+      res.redirect("/");
+    }
+  }
 });
 
-app.listen(HTTP_PORT, onHttpStart);
+/*========================================================================*/
+//                 Now we will make our post route which
+//                       will Delete our Employee
+app.post("/createEmployee", (req, res) => {
+  if (
+    req.body.firstName.trim().length != 0 &&
+    req.body.firstName.trim().length != 0
+  ) {
+    Employee.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      city: req.body.city
+    }).then(function() {
+      res.redirect("/");
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+seq.sync().then(() => {
+  app.listen(HTTP_PORT, onHttpStart);
+});
